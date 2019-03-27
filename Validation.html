@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = () => {
+        var box = document.getElementById('box');
+        var name = document.getElementById('name');
+        var pas = document.getElementById('pas');
+        var btn = document.getElementById('btn');
+        name.onblur = () => {
+            var use = name.value.trim();
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', 'Validation.php?usename=' + use, true);
+            xhr.send(null);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {//验证响应完成
+                    if (xhr.status == 200) {//数据正确
+                        var s = xhr.responseText;
+                        console.log(s)
+                        if (s == 0) {
+                            box.innerHTML = '用户名已经注册';
+
+                        } else if (s == 1) {
+                            box.innerHTML = '用户名可以注册';
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+<body>
+    <form action="" method="get" id="for">
+        用户名：<input type="text" name="" id="name">
+        密码：<input type="password" name="" id="pas">
+        <input type="button" name="" id="but" value="注册">
+    </form>
+    <div id="box"></div>
+</body>
+
+</html>
